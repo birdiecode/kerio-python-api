@@ -37,3 +37,14 @@ class KerioOperator(Kerio):
                 ]
             }
         })['result']
+
+    def getCallQueues(self, start=0, limit=-1):
+        return self.request("CallQueues.get", {
+            "query": {
+                "start": start,
+                "limit": limit,
+                "orderBy": [
+                    {"columnName": "queueNumber", "direction": "Asc"}
+                ]
+            }
+        })['result']
