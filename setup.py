@@ -3,6 +3,9 @@ from setuptools import setup
 with open("README.md") as file:
     read_me = file.read()
 
+with open("requirements.txt") as file:
+    requires = file.read().split('\n')
+
 setup(
     name="kerio",
     version="0.1",
@@ -14,5 +17,6 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/birdiecode/kerio-python-api",
     packages=['kerio'],
-    python_requires='>=3.5'
+    python_requires='>=3.5',
+    install_requires=requires
 )
