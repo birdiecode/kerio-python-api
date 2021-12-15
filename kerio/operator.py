@@ -70,3 +70,6 @@ class KerioOperator(Kerio):
                 ]
             }
         })['result']
+
+    def getPbxServices(self):
+        return self.request("PbxServices.get", {})['result']
