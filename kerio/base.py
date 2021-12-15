@@ -3,8 +3,10 @@ import time
 import requests
 
 PRODUCT_CONNECT = 1
+PRODUCT_OPERATOR = 2
 PRODUCT = {
-    1: "CONNECT"
+    1: "CONNECT",
+    2: "OPERATOR"
 }
 
 
