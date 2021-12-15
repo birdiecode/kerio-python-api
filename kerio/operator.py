@@ -7,3 +7,6 @@ class KerioOperator(Kerio):
 
     def getUsers(self, start=0, limit=-1):
         return self.request("Users.get", {"query": {"start": start, "limit": limit, "orderBy": [{"columnName": "EXTENSIONS", "direction": "Asc"}]}})['result']
+
+    def getExtensions(self, start=0, limit=-1):
+        return self.request("Extensions.get", {"query": {"start": start, "limit": limit, "orderBy": [{"columnName": "telNum", "direction": "Asc"}]}})['result']
