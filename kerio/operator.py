@@ -48,3 +48,14 @@ class KerioOperator(Kerio):
                 ]
             }
         })['result']
+
+    def getAutoAttendantScripts(self, start=0, limit=-1):
+        return self.request("AutoAttendantScripts.get", {
+            "query": {
+                "start": start,
+                "limit": limit,
+                "orderBy": [
+                    {"columnName": "IVR_NUMBER", "direction": "Asc"}
+                ]
+            }
+        })['result']
