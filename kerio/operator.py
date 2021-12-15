@@ -59,3 +59,14 @@ class KerioOperator(Kerio):
                 ]
             }
         })['result']
+
+    def getRingingGroups(self, start=0, limit=-1):
+        return self.request("RingingGroups.get", {
+            "query": {
+                "start": start,
+                "limit": limit,
+                "orderBy": [
+                    {"columnName": "EXTENSION_NUMBER", "direction": "Asc"}
+                ]
+            }
+        })['result']
