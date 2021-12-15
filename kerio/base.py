@@ -18,6 +18,7 @@ class Kerio:
         self.login = login
         self.password = password
         self.account = None
+        self.request_id = 1
 
         if automatic_authorization: self.authorization()
 
@@ -31,5 +32,22 @@ class Kerio:
         self.account = {
             'session': result.cookies["SESSION_" + PRODUCT[self.product] + "_WEBADMIN"],
             'token': result.cookies["TOKEN_" + PRODUCT[self.product] + "_WEBADMIN"],
-            'creation': int(time.time())
+            'last_use': int(time.time())
         }
+
+    def request(self, method, params):
+        if int(time.time()) - self.account['last_use'] > 120:
+            raise Exception("Просроченные авторизационные данные.")
+        result = requests.post("https://" + self.domain + "/admin/api/jsonrpc/",
+            verify=False,
+            cookies={"SESSION_" + PRODUCT[self.product] + "_WEBADMIN": self.account['session'],
+                   "TOKEN_" + PRODUCT[self.product] + "_WEBADMIN": self.account['token']},
+            headers={"X-Token": self.account['token'], "Accept": "application/json-rpc"},
+            json={
+                'jsonrpc': '2.0',
+                'id': self.request_id,
+                'method': method,
+                'params': params})
+        self.request_id += 1
+        self.account['last_use'] = int(time.time())
+        return result.json()
