@@ -149,3 +149,14 @@ class KerioOperator(Kerio):
                 ]
             }
         })['result']
+
+    def getCallsStatus(self):
+        return self.request("Status.getCalls", {
+            "query": {
+                "start": 0,
+                "limit": -1,
+                "orderBy": [
+                    {"columnName": "ANSWERED_DURATION", "direction": "Asc"}
+                ]
+            }
+        })
