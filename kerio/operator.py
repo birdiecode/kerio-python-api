@@ -74,7 +74,7 @@ class KerioOperator(Kerio):
     def getPbxServices(self):
         return self.request("PbxServices.get", {})['result']
 
-    def getDomains(self):
+    def getDomains(self, start=0, limit=-1):
         return self.request("Domains.get", {
             "query": {
                 "fields": [
@@ -100,7 +100,15 @@ class KerioOperator(Kerio):
                         "direction": "Asc"
                     }
                 ],
-                "start": 0,
-                "limit": -1
+                "start": start,
+                "limit": limit
+            }
+        })['result']
+
+    def getGroupListAccessPolicy(self, start=0, limit=-1):
+        return self.request("AccessPolicy.getGroupList", {
+            "query": {
+                "start": start,
+                "limit": limit
             }
         })['result']
