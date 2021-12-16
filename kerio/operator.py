@@ -74,11 +74,11 @@ class KerioOperator(Kerio):
     def getPbxServices(self):
         return self.request("PbxServices.get", {})['result']
 
-    def createExtensions(self, telNum: str, sipUsername, description, sipPassword):
+    def createExtensions(self, tel_num: str, sip_username: str, description: str, sip_password: str):
         return self.request("RingingGroups.get", {
             'detail': {
-                'telNum': telNum,
-                'sipUsername': sipUsername,
+                'telNum': tel_num,
+                'sipUsername': sip_username,
                 'description': description,
                 'callPermission': 1,
                 'userGuid': None,
@@ -98,6 +98,43 @@ class KerioOperator(Kerio):
                 'faxDetect': False,
                 'faxDetectType': 0,
                 'dtmfMode': 0,
-                'sipPassword': sipPassword
+                'sipPassword': sip_password
+            }
+        })['result']
+
+    def toolsExtensionForUser(self, guid_group, tel_num: str, description):
+        return {"GUID": guid_group,
+                "TEL_NUM": tel_num,
+                "DESCRIPTION": description,
+                "IS_PRIMARY":True,
+                "RING_EXTENSION":True,
+                "RING_EXTENSION_TIMEOUT":120,
+                "BUSY_ACTION":1,
+                "VOICEMAIL_FALLBACK":False,
+                "VOICEMAIL_FALLBACK_TIMEOUT":120,
+                "FIND_ME_LIST":[],
+                "OCCUPIED_REJECT":"",
+                "OBEY_RING_RULES":"",
+                "WEBRTC_RING_GROUP":""}
+
+    def createUsers(self, username: str, user_password: str, ami_password: str, extensions, full_name="", email=""):
+        return self.request("RingingGroups.get", {
+            "detail": {
+                "LDAP_ENABLED": 0,
+                "FULL_NAME": full_name,
+                "EMAIL": email,
+                "DISABLED": 0,
+                "ADMINISTRATION_ROLE_ID": 2,
+                "EXTENSIONS": extensions,
+                "LANGUAGE_PBX": 1,
+                "AMI_ENABLED": False,
+                "WEBRTC_ENABLED": True,
+                "VOICEMAIL_DISABLED": False,
+                "VOICEMAIL_PRESS0_ENABLED": False,
+                "VOICEMAIL_PRESS0_TELNUM": "",
+                "USERNAME": username,
+                "USER_PASSWORD": user_password,
+                "PIN": "1191",
+                "AMI_PASSWORD": ami_password
             }
         })['result']
