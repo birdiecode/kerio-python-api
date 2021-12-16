@@ -73,3 +73,34 @@ class KerioOperator(Kerio):
 
     def getPbxServices(self):
         return self.request("PbxServices.get", {})['result']
+
+    def getDomains(self):
+        return self.request("Domains.get", {
+            "query": {
+                "fields": [
+                    "id",
+                    "name",
+                    "service",
+                    "keepForRecovery",
+                    "isDistributed",
+                    "deletedItems",
+                    "junkEmail",
+                    "sentItems",
+                    "autoDelete",
+                    "isPrimary",
+                    "passwordExpirationEnabled",
+                    "passwordComplexityEnabled",
+                    "passwordMinimumLength",
+                    "passwordHistoryCount",
+                    "isLdapManagementAllowed"
+                ],
+                "orderBy": [
+                    {
+                        "columnName": "name",
+                        "direction": "Asc"
+                    }
+                ],
+                "start": 0,
+                "limit": -1
+            }
+        })['result']
