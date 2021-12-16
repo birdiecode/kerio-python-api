@@ -138,3 +138,14 @@ class KerioOperator(Kerio):
                 "AMI_PASSWORD": ami_password
             }
         })['result']
+
+    def getCallHistory(self, start=0, limit=-1):
+        return self.request("CallHistory.get", {
+            "query": {
+                "limit": limit,
+                "start": start,
+                "orderBy": [
+                    {"columnName": "TIMESTAMP", "direction": "Desc"}
+                ]
+            }
+        })['result']
