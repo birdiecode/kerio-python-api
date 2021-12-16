@@ -73,3 +73,31 @@ class KerioOperator(Kerio):
 
     def getPbxServices(self):
         return self.request("PbxServices.get", {})['result']
+
+    def createExtensions(self, telNum: str, sipUsername, description, sipPassword):
+        return self.request("RingingGroups.get", {
+            'detail': {
+                'telNum': telNum,
+                'sipUsername': sipUsername,
+                'description': description,
+                'callPermission': 1,
+                'userGuid': None,
+                'selectedCodecs': [
+                    {'ID': 'G.711 A-law', 'SEQUENCE': 1, 'DESCRIPTION': 'G.711 A-law'},
+                    {'ID': 'G.711 U-law', 'SEQUENCE': 2, 'DESCRIPTION': 'G.711 U-law'},
+                    {'ID': 'GSM Full Rate', 'SEQUENCE': 3, 'DESCRIPTION': 'GSM Full Rate'},
+                    {'ID': 'speex', 'SEQUENCE': 4, 'DESCRIPTION': 'SpeeX'},
+                    {'ID': 'ilbc', 'SEQUENCE': 5, 'DESCRIPTION': 'iLBC'},
+                    {'ID': 'g722', 'SEQUENCE': 6, 'DESCRIPTION': 'G.722 (wideband)'},
+                    {'ID': 'g726', 'SEQUENCE': 7, 'DESCRIPTION': 'G.726'}
+                ],
+                'natSupport': False,
+                'secured': False,
+                'recordInbound': True,
+                'recordOutbound': True,
+                'faxDetect': False,
+                'faxDetectType': 0,
+                'dtmfMode': 0,
+                'sipPassword': sipPassword
+            }
+        })['result']
