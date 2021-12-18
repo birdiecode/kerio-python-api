@@ -160,3 +160,6 @@ class KerioOperator(Kerio):
                 ]
             }
         })
+
+    def getSshSystemTasks(self):
+        return self.request("SystemTasks.getSsh", {})
