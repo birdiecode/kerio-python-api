@@ -163,3 +163,8 @@ class KerioOperator(Kerio):
 
     def getSshSystemTasks(self):
         return self.request("SystemTasks.getSsh", {})
+
+    def getSystemHealth(self):
+        return self.request("SystemHealth.get", {
+            "histogramType":"HistogramOneMonth"
+        })
