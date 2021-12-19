@@ -168,3 +168,11 @@ class KerioOperator(Kerio):
         return self.request("SystemHealth.get", {
             "histogramType":"HistogramOneMonth"
         })
+
+    def getRecordings(self, start=0, limit=-1):
+        return self.request("Recordings.get", {
+            "query": {
+                "start": start,
+                "limit": limit
+            }
+        })
