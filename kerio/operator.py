@@ -176,3 +176,15 @@ class KerioOperator(Kerio):
                 "limit": limit
             }
         })
+
+    def getInternalDirectoryListServer(self, start=0, limit=-1):
+        return self.request("Server.getInternalDirectoryList", {
+            "query": {
+                "start": start,
+                "limit": limit,
+                "orderBy": [
+                    {"columnName":"TEL_NUM","direction":"Asc"}
+                ]
+            },
+            "onlyExtensions": False
+        })
