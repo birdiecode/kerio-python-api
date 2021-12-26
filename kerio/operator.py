@@ -117,8 +117,8 @@ class KerioOperator(Kerio):
                 "OBEY_RING_RULES":"",
                 "WEBRTC_RING_GROUP":""}
 
-    def createUsers(self, username: str, user_password: str, ami_password: str, extensions, full_name="", email=""):
-        return self.request("RingingGroups.get", {
+    def createUsers(self, username: str, user_password: str, ami_password: str, extensions: list, full_name="", email=""):
+        return self.request("Users.create", {
             "detail": {
                 "LDAP_ENABLED": 0,
                 "FULL_NAME": full_name,
