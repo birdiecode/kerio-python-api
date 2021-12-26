@@ -75,7 +75,7 @@ class KerioOperator(Kerio):
         return self.request("PbxServices.get", {})['result']
 
     def createExtensions(self, tel_num: str, sip_username: str, description: str, sip_password: str):
-        return self.request("RingingGroups.get", {
+        return self.request("Extensions.create", {
             'detail': {
                 'telNum': tel_num,
                 'sipUsername': sip_username,
