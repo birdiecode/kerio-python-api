@@ -43,3 +43,8 @@ class KerioConnect(Kerio):
                 "limit": limit
             }
         })['result']
+
+    def createUsers():
+        return self.request("Users.create", {
+            "users": users
+            })
