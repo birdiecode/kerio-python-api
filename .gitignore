@@ -2,3 +2,5 @@
 /build/
 /dist/
 /kerio.egg-info/
+kerio/__pycache__/
+kerio/__pycache__/*
