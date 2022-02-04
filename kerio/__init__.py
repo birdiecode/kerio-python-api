@@ -1,3 +1,5 @@
+from .control import KerioControl
+
 from .connect import KerioConnect
 from .connect import KerioConnectToolMakeUser
 from .connect import KerioConnectToolDomains
