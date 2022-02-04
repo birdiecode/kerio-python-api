@@ -12,3 +12,17 @@ class KerioControl(Kerio):
                 "limit": limit,
             }
         })['result']
+
+    def getLeasesDhcp(self, scopeIds, start=0, limit=-1):
+        return self.request("Dhcp.getLeases", {
+            "query": {
+                "conditions":[],
+                "combining":"Or",
+                "orderBy":[{"columnName":"ipAddress","direction":"Asc"}],
+                "start": start,
+                "limit": limit,
+            },
+            "scopeIds": scopeIds
+        })['result']
+
+
