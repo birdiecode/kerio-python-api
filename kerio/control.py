@@ -25,4 +25,12 @@ class KerioControl(Kerio):
             "scopeIds": scopeIds
         })['result']
 
+    def getVpnClients(self, start=0, limit=-1):
+        return self.request("VpnClients.get", {
+            "query": {
+                "start": start,
+                "limit": limit,
+            },
+            "refresh": True
+        })['result']
 
