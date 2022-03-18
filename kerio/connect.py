@@ -166,3 +166,6 @@ class KerioConnect(Kerio):
 
     def getMailboxCountUsers(self):
         return self.request("Users.getMailboxCount", {})
+
+    def getRoleDistributedDomain(self):
+        return self.request("DistributedDomain.getRole", {})
