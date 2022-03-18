@@ -163,3 +163,6 @@ class KerioConnect(Kerio):
         return self.request("Users.create", {
             "users": users
             })
+
+    def getMailboxCountUsers(self):
+        return self.request("Users.getMailboxCount", {})
